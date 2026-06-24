@@ -24,7 +24,11 @@ def pregunta_12():
     39   39                    ggg:3,hhh:8,jjj:5
     """
     tbl2 = pd.read_csv("files/input/tbl2.tsv", sep="\t")
-    tbl2["c5a_c5b"] = tbl2["c5a"] + ":" + tbl2["c5b"].astype(str)
-    return tbl2.groupby("c0")["c5a_c5b"].apply(lambda x: ",".join(x))
+    return (
+        tbl2.assign(c5=tbl2["c5a"] + ":" + tbl2["c5b"].astype(str))
+        .groupby("c0")["c5"]
+        .apply(lambda x: ",".join(sorted(x)))
+        .reset_index()
+    )
 
 print(pregunta_12())

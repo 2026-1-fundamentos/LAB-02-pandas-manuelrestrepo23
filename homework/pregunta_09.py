@@ -25,7 +25,7 @@ def pregunta_09():
 
     """
     tbl0 = pd.read_csv("files/input/tbl0.tsv", sep="\t")
-    tbl0["anio"] = pd.to_datetime(tbl0["c3"], format="mixed", errors="coerce").dt.year.astype("Int64")
+    tbl0["year"] = tbl0["c3"].str[:4]
     return tbl0
 
 print(pregunta_09())
